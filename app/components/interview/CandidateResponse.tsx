@@ -89,7 +89,7 @@ const CandidateResponse: React.FC<CandidateResponseProps> = ({
         
         <Paragraph>
           <Text strong>Interview Type: </Text>
-          {interviewType === 'video' ? (
+          {interviewType === InterviewType.VIDEO ? (
             <Tag icon={<VideoCameraOutlined />} color="blue">Video Interview</Tag>
           ) : (
             <Tag icon={<BankOutlined />} color="green">On-site Interview</Tag>

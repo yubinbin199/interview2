@@ -47,7 +47,7 @@ const InterviewInvitationForm: React.FC<Props> = ({
   onResend,
 }) => {
   const [form] = Form.useForm();
-  const [selectedType, setSelectedType] = useState<InterviewType>('onsite');
+  const [selectedType, setSelectedType] = useState<InterviewType>(InterviewType.IN_PERSON);
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -116,16 +116,16 @@ const InterviewInvitationForm: React.FC<Props> = ({
 
   const handleRemoveTimeSlot = (slotToRemove: TimeSlot) => {
     setAvailableSlots(availableSlots.filter(slot => 
-      !(slot.date === slotToRemove.date && slot.start === slotToRemove.start)
+      !(slot.date === slotToRemove.date && slot.time === slotToRemove.time)
     ));
   };
 
-  if (invitation.status === 'expired') {
+  if (invitation.status === 'cancelled') {
     return (
       <Card className={styles.interviewCard}>
         <Alert
-          message="Interview Invitation Expired"
-          description="This interview invitation has expired. Would you like to send a new invitation?"
+          message="Interview Invitation Cancelled"
+          description="This interview invitation has been cancelled. Would you like to send a new invitation?"
           type="warning"
           action={
             <Button type="primary" onClick={handleResend} loading={loading}>
@@ -138,7 +138,7 @@ const InterviewInvitationForm: React.FC<Props> = ({
   }
 
   const renderEmailPreview = () => {
-    const candidateName = invitation.candidate?.name || 'Candidate';
+    const candidateName = invitation.candidateName || 'Candidate';
     
     return (
       <Card 
@@ -204,10 +204,10 @@ const InterviewInvitationForm: React.FC<Props> = ({
           className={styles.interviewType}
         >
           <div className={styles.interviewTypeCheckboxes}>
-            <div className={`${styles.typeCheckbox} ${selectedType === 'onsite' ? styles.typeCheckboxSelected : ''}`}>
+            <div className={`${styles.typeCheckbox} ${selectedType === InterviewType.IN_PERSON ? styles.typeCheckboxSelected : ''}`}>
               <Checkbox 
-                checked={selectedType === 'onsite'} 
-                onChange={() => handleTypeChange('onsite')}
+                checked={selectedType === InterviewType.IN_PERSON} 
+                onChange={() => handleTypeChange(InterviewType.IN_PERSON)}
               >
                 <Space>
                   <BankOutlined />
@@ -216,10 +216,10 @@ const InterviewInvitationForm: React.FC<Props> = ({
               </Checkbox>
             </div>
             
-            <div className={`${styles.typeCheckbox} ${selectedType === 'video' ? styles.typeCheckboxSelected : ''}`}>
+            <div className={`${styles.typeCheckbox} ${selectedType === InterviewType.VIDEO ? styles.typeCheckboxSelected : ''}`}>
               <Checkbox 
-                checked={selectedType === 'video'} 
-                onChange={() => handleTypeChange('video')}
+                checked={selectedType === InterviewType.VIDEO} 
+                onChange={() => handleTypeChange(InterviewType.VIDEO)}
               >
                 <Space>
                   <VideoCameraOutlined />
@@ -246,7 +246,7 @@ const InterviewInvitationForm: React.FC<Props> = ({
                 <div className={styles.timeSlotCard}>
                   <div className={styles.timeSlotDate}>{dayjs(slot.date).format('MMM DD (ddd)')}</div>
                   <div className={styles.timeSlotTime}>
-                    <ClockCircleOutlined /> {slot.start} - {slot.end}
+                    <ClockCircleOutlined /> {slot.time}
                   </div>
                   <Button 
                     type="text" 
