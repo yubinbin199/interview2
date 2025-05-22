@@ -68,7 +68,7 @@ export default function Interviewer() {
         <Col span={24}>
           <Card 
             title="Interview Invitation Letter" 
-            bordered={false} 
+            variant="borderless"
             extra={<MailOutlined />}
           >
             <div style={{ background: '#f5f5f5', padding: 16, borderRadius: 8 }}>
@@ -153,7 +153,7 @@ export default function Interviewer() {
         </Col>
         
         <Col span={24}>
-          <Card bordered={false}>
+          <Card variant="borderless">
             <Alert 
               message="Confirmation"
               description="Once you confirm your selection, we will send you a confirmation email with all the details."

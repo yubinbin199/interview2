@@ -9,11 +9,6 @@ const nextConfig = {
   eslint: {
     // 部署时忽略ESLint错误
     ignoreDuringBuilds: true,
-  },
-  // 可选：添加国际化配置
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
   }
 };
 

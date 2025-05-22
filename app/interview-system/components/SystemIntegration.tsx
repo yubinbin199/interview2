@@ -24,7 +24,7 @@ export default function SystemIntegration() {
         <Col span={12}>
           <Card 
             title="Google Calendar API" 
-            bordered={false}
+            variant="borderless"
             extra={<CalendarOutlined />}
           >
             <Form layout="vertical">
@@ -66,7 +66,7 @@ export default function SystemIntegration() {
         <Col span={12}>
           <Card 
             title="DingTalk Notification API" 
-            bordered={false}
+            variant="borderless"
             extra={<ApiOutlined />}
           >
             <Form layout="vertical">
@@ -106,7 +106,7 @@ export default function SystemIntegration() {
         <Col span={12}>
           <Card 
             title="Email Service Configuration" 
-            bordered={false}
+            variant="borderless"
             extra={<MailOutlined />}
           >
             <Form layout="vertical">
@@ -151,7 +151,7 @@ export default function SystemIntegration() {
         <Col span={12}>
           <Card 
             title="Security Settings" 
-            bordered={false}
+            variant="borderless"
             extra={<SafetyOutlined />}
           >
             <Form layout="vertical">
@@ -198,7 +198,7 @@ export default function SystemIntegration() {
         </Col>
         
         <Col span={24}>
-          <Card bordered={false}>
+          <Card variant="borderless">
             <Space>
               <Button type="primary" icon={<LockOutlined />} size="large">
                 Save Settings

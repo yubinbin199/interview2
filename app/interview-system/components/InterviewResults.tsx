@@ -6,7 +6,6 @@ import { MailOutlined, GlobalOutlined, UserOutlined } from '@ant-design/icons';
 import type { TableColumnsType } from 'antd';
 
 const { Title, Paragraph, Text } = Typography;
-const { TabPane } = Tabs;
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -165,13 +164,13 @@ Tuwaii Technology
     <div>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Card title="Candidate List" bordered={false}>
+          <Card title="Candidate List" variant="borderless">
             <Table columns={columns} dataSource={candidates} />
           </Card>
         </Col>
         
         <Col span={24}>
-          <Card title="Feedback Email" bordered={false} extra={<MailOutlined />}>
+          <Card title="Feedback Email" variant="borderless" extra={<MailOutlined />}>
             <Form layout="vertical">
               <Form.Item label="Select Region Template" name="region">
                 <Select 

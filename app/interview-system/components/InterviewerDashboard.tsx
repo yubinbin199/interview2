@@ -129,189 +129,201 @@ export default function InterviewerDashboard() {
       );
     }
 
-    return (
-      <Card>
-        <Tabs activeKey={activeTab} onChange={setActiveTab}>
-          <Tabs.TabPane tab="Overview" key="overview">
+    const tabItems = [
+      {
+        key: 'overview',
+        label: 'Overview',
+        children: (
+          <Row gutter={[16, 16]}>
+            <Col span={24}>
+              <Card type="inner" title="Candidate Information">
+                <Row gutter={[16, 16]}>
+                  <Col span={4}>
+                    <Avatar size={80} icon={<UserOutlined />} />
+                  </Col>
+                  <Col span={20}>
+                    <Title level={4}>{selectedCandidate.name}</Title>
+                    <Space direction="vertical" size={2}>
+                      <Text><strong>Position:</strong> {selectedCandidate.position}</Text>
+                      <Text><strong>Education:</strong> {selectedCandidate.school}</Text>
+                      <Text><strong>Interview Type:</strong> <Tag color="orange">{selectedCandidate.type}</Tag></Text>
+                      <Text>
+                        <strong>Schedule:</strong> {selectedCandidate.date} {selectedCandidate.time} 
+                        <Tag color="blue" style={{ marginLeft: 8 }}>
+                          <ClockCircleOutlined /> {selectedCandidate.status === 'upcoming' ? 'Upcoming' : 'Completed'}
+                        </Tag>
+                      </Text>
+                    </Space>
+                  </Col>
+                </Row>
+              </Card>
+            </Col>
+
+            <Col span={24}>
+              <Card 
+                type="inner" 
+                title="Interview Details" 
+                extra={
+                  selectedCandidate.status === 'upcoming' && (
+                    <Button type="primary">
+                      Start Interview
+                    </Button>
+                  )
+                }
+              >
+                <Space direction="vertical" style={{ width: '100%' }}>
+                  <Paragraph>
+                    <Text strong>Interview Format:</Text> {selectedCandidate.type === '业务面' ? 'Technical Interview' : 'Final Interview'}
+                  </Paragraph>
+                  
+                  <Paragraph>
+                    <Space>
+                      <EnvironmentOutlined />
+                      <Text>In-person Interview at Tuwaii Office</Text>
+                    </Space>
+                  </Paragraph>
+                  
+                  <Paragraph>
+                    <Text strong>Required Documents:</Text>
+                    <ul>
+                      <li>Candidate Resume</li>
+                      <li>Portfolio (if applicable)</li>
+                      <li>Interview Question Set</li>
+                    </ul>
+                  </Paragraph>
+                  
+                  <Paragraph>
+                    <Text strong>Reminders:</Text>
+                    <ul>
+                      <li>Review the candidate's resume before the interview</li>
+                      <li>Complete the assessment form after the interview</li>
+                      <li>Submit feedback within 24 hours</li>
+                    </ul>
+                  </Paragraph>
+                </Space>
+              </Card>
+            </Col>
+          </Row>
+        )
+      },
+      {
+        key: 'resume',
+        label: 'Resume',
+        children: (
+          <Card type="inner" title="Candidate Resume">
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <Card type="inner" title="Candidate Information">
-                  <Row gutter={[16, 16]}>
-                    <Col span={4}>
-                      <Avatar size={80} icon={<UserOutlined />} />
-                    </Col>
-                    <Col span={20}>
-                      <Title level={4}>{selectedCandidate.name}</Title>
-                      <Space direction="vertical" size={2}>
-                        <Text><strong>Position:</strong> {selectedCandidate.position}</Text>
-                        <Text><strong>Education:</strong> {selectedCandidate.school}</Text>
-                        <Text><strong>Interview Type:</strong> <Tag color="orange">{selectedCandidate.type}</Tag></Text>
-                        <Text>
-                          <strong>Schedule:</strong> {selectedCandidate.date} {selectedCandidate.time} 
-                          <Tag color="blue" style={{ marginLeft: 8 }}>
-                            <ClockCircleOutlined /> {selectedCandidate.status === 'upcoming' ? 'Upcoming' : 'Completed'}
-                          </Tag>
-                        </Text>
-                      </Space>
-                    </Col>
-                  </Row>
+                <Card
+                  type="inner"
+                  title="Work Experience"
+                >
+                  <Title level={5}>PDM Intern</Title>
+                  <Text type="secondary">Tencent, Shanghai • 2022/06 - 2022/12</Text>
+                  <Paragraph style={{ marginTop: 8 }}>
+                    AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；
+                  </Paragraph>
                 </Card>
               </Col>
-
+              
               <Col span={24}>
-                <Card 
-                  type="inner" 
-                  title="Interview Details" 
-                  extra={
-                    selectedCandidate.status === 'upcoming' && (
-                      <Button type="primary">
-                        Start Interview
-                      </Button>
-                    )
-                  }
+                <Card
+                  type="inner"
+                  title="Education"
                 >
-                  <Space direction="vertical" style={{ width: '100%' }}>
-                    <Paragraph>
-                      <Text strong>Interview Format:</Text> {selectedCandidate.type === '业务面' ? 'Technical Interview' : 'Final Interview'}
-                    </Paragraph>
-                    
-                    <Paragraph>
-                      <Space>
-                        <EnvironmentOutlined />
-                        <Text>In-person Interview at Tuwaii Office</Text>
-                      </Space>
-                    </Paragraph>
-                    
-                    <Paragraph>
-                      <Text strong>Required Documents:</Text>
-                      <ul>
-                        <li>Candidate Resume</li>
-                        <li>Portfolio (if applicable)</li>
-                        <li>Interview Question Set</li>
-                      </ul>
-                    </Paragraph>
-                    
-                    <Paragraph>
-                      <Text strong>Reminders:</Text>
-                      <ul>
-                        <li>Review the candidate's resume before the interview</li>
-                        <li>Complete the assessment form after the interview</li>
-                        <li>Submit feedback within 24 hours</li>
-                      </ul>
-                    </Paragraph>
+                  <Title level={5}>{selectedCandidate.school}</Title>
+                  <Text type="secondary">2019 - 2023 • 硕士</Text>
+                  <Paragraph style={{ marginTop: 8 }}>
+                    主修产品设计与开发，GPA 3.8/4.0
+                  </Paragraph>
+                </Card>
+              </Col>
+              
+              <Col span={24}>
+                <Card
+                  type="inner"
+                  title="Skills"
+                >
+                  <Space wrap>
+                    <Tag>产品设计</Tag>
+                    <Tag>用户研究</Tag>
+                    <Tag>原型设计</Tag>
+                    <Tag>需求分析</Tag>
+                    <Tag>数据分析</Tag>
                   </Space>
                 </Card>
               </Col>
             </Row>
-          </Tabs.TabPane>
-          
-          <Tabs.TabPane tab="Resume" key="resume">
-            <Card type="inner" title="Candidate Resume">
-              <Row gutter={[16, 16]}>
-                <Col span={24}>
-                  <Card
-                    type="inner"
-                    title="Work Experience"
-                  >
-                    <Title level={5}>PDM Intern</Title>
-                    <Text type="secondary">Tencent, Shanghai • 2022/06 - 2022/12</Text>
-                    <Paragraph style={{ marginTop: 8 }}>
-                      AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；AI总结所有的经历内容，100字以内；
-                    </Paragraph>
-                  </Card>
-                </Col>
-                
-                <Col span={24}>
-                  <Card
-                    type="inner"
-                    title="Education"
-                  >
-                    <Title level={5}>{selectedCandidate.school}</Title>
-                    <Text type="secondary">2019 - 2023 • 硕士</Text>
-                    <Paragraph style={{ marginTop: 8 }}>
-                      主修产品设计与开发，GPA 3.8/4.0
-                    </Paragraph>
-                  </Card>
-                </Col>
-                
-                <Col span={24}>
-                  <Card
-                    type="inner"
-                    title="Skills"
-                  >
-                    <Space wrap>
-                      <Tag>产品设计</Tag>
-                      <Tag>用户研究</Tag>
-                      <Tag>原型设计</Tag>
-                      <Tag>需求分析</Tag>
-                      <Tag>数据分析</Tag>
-                    </Space>
-                  </Card>
-                </Col>
-              </Row>
-            </Card>
-          </Tabs.TabPane>
-          
-          <Tabs.TabPane tab="Assessment" key="assessment">
-            <Card type="inner" title="Candidate Assessment">
-              <Form layout="vertical">
-                <Form.Item
-                  label="Technical Skills"
-                  name="technicalSkills"
-                >
-                  <Rate count={5} />
-                </Form.Item>
-                
-                <Form.Item
-                  label="Communication Skills"
-                  name="communicationSkills"
-                >
-                  <Rate count={5} />
-                </Form.Item>
-                
-                <Form.Item
-                  label="Problem Solving"
-                  name="problemSolving"
-                >
-                  <Rate count={5} />
-                </Form.Item>
-                
-                <Form.Item
-                  label="Cultural Fit"
-                  name="culturalFit"
-                >
-                  <Rate count={5} />
-                </Form.Item>
-                
-                <Form.Item
-                  label="Overall Recommendation"
-                  name="recommendation"
-                >
-                  <Select placeholder="Select your recommendation">
-                    <Option value="strong_hire">Strong Hire</Option>
-                    <Option value="hire">Hire</Option>
-                    <Option value="neutral">Neutral</Option>
-                    <Option value="no_hire">Do Not Hire</Option>
-                    <Option value="strong_no_hire">Strong Do Not Hire</Option>
-                  </Select>
-                </Form.Item>
-                
-                <Form.Item
-                  label="Feedback"
-                  name="feedback"
-                >
-                  <TextArea rows={4} placeholder="Provide detailed feedback about the candidate" />
-                </Form.Item>
-                
-                <Form.Item>
-                  <Button type="primary" icon={<CheckCircleOutlined />}>
-                    Submit Assessment
-                  </Button>
-                </Form.Item>
-              </Form>
-            </Card>
-          </Tabs.TabPane>
-        </Tabs>
+          </Card>
+        )
+      },
+      {
+        key: 'assessment',
+        label: 'Assessment',
+        children: (
+          <Card type="inner" title="Candidate Assessment">
+            <Form layout="vertical">
+              <Form.Item
+                label="Technical Skills"
+                name="technicalSkills"
+              >
+                <Rate count={5} />
+              </Form.Item>
+              
+              <Form.Item
+                label="Communication Skills"
+                name="communicationSkills"
+              >
+                <Rate count={5} />
+              </Form.Item>
+              
+              <Form.Item
+                label="Problem Solving"
+                name="problemSolving"
+              >
+                <Rate count={5} />
+              </Form.Item>
+              
+              <Form.Item
+                label="Cultural Fit"
+                name="culturalFit"
+              >
+                <Rate count={5} />
+              </Form.Item>
+              
+              <Form.Item
+                label="Overall Recommendation"
+                name="recommendation"
+              >
+                <Select placeholder="Select your recommendation">
+                  <Option value="strong_hire">Strong Hire</Option>
+                  <Option value="hire">Hire</Option>
+                  <Option value="neutral">Neutral</Option>
+                  <Option value="no_hire">Do Not Hire</Option>
+                  <Option value="strong_no_hire">Strong Do Not Hire</Option>
+                </Select>
+              </Form.Item>
+              
+              <Form.Item
+                label="Feedback"
+                name="feedback"
+              >
+                <TextArea rows={4} placeholder="Provide detailed feedback about the candidate" />
+              </Form.Item>
+              
+              <Form.Item>
+                <Button type="primary" icon={<CheckCircleOutlined />}>
+                  Submit Assessment
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+        )
+      }
+    ];
+
+    return (
+      <Card>
+        <Tabs activeKey={activeTab} onChange={setActiveTab} items={tabItems} />
       </Card>
     );
   };
@@ -327,7 +339,7 @@ export default function InterviewerDashboard() {
     <div>
       <Row gutter={[24, 24]}>
         <Col span={24}>
-          <Card title="Upcoming Interviews" bordered={false}>
+          <Card title="Upcoming Interviews" variant="borderless">
             <Table 
               columns={columns} 
               dataSource={candidates} 
