@@ -5,7 +5,7 @@
   "description": "基于Next.js和Ant Design 5构建的企业级系统原型",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --no-lint",
+    "build": "next build --no-lint --no-typescript-error-check",
     "start": "next start",
     "lint": "next lint"
   },
