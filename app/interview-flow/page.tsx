@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { Typography, Steps, Card, Button, message } from 'antd';
-import InterviewInvitationForm from '../components/interview/InterviewInvitation';
-import CandidateResponse from '../components/interview/CandidateResponse';
-import PageLayoutWithNav from '../components/PageLayoutWithNav';
+import InterviewInvitationForm from '@/app/components/interview/InterviewInvitation';
+import CandidateResponse from '@/app/components/interview/CandidateResponse';
+import PageLayoutWithNav from '@/app/components/PageLayoutWithNav';
 import dayjs from 'dayjs';
-import { InterviewType, TimeSlot, InterviewInvitation } from '../types/interview';
+import { InterviewType, TimeSlot, InterviewInvitation } from '@/app/types/interview';
 
 const { Title, Text } = Typography;
 
@@ -14,44 +14,46 @@ export default function InterviewFlowPage() {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [invitationSent, setInvitationSent] = useState<boolean>(false);
   const [timeSlotSelected, setTimeSlotSelected] = useState<TimeSlot | null>(null);
-  const [interviewType, setInterviewType] = useState<InterviewType>('video');
+  const [interviewType, setInterviewType] = useState<InterviewType>(InterviewType.VIDEO);
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
 
   // Mock data
   const mockInvitation: InterviewInvitation = {
     id: '1',
-    candidate: {
-      id: '101',
-      name: 'John Smith',
-      email: 'john.smith@example.com',
-      region: 'Shanghai',
-      position: 'Frontend Developer'
-    },
-    interviewers: [],
-    type: 'video',
-    status: 'pending',
-    createdAt: new Date().toISOString(),
-    expiresAt: dayjs().add(7, 'day').toISOString()
+    candidateName: 'John Smith',
+    candidateEmail: 'john.smith@example.com',
+    position: 'Frontend Developer',
+    interviewType: InterviewType.VIDEO,
+    timeSlot: null,
+    status: 'sent',
+    interviewers: []
   };
 
   // Generate time slots for the next 5 business days
   const generateTimeSlots = (): TimeSlot[] => {
     const today = dayjs();
     const slots: TimeSlot[] = [];
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     
     for (let i = 0; i < 5; i++) {
       const date = today.add(i + 1, 'day');
+      const day = date.day();
+      
       slots.push({
+        id: `morning-${i}`,
         date: date.format('YYYY-MM-DD'),
-        start: '10:00',
-        end: '11:00',
+        weekday: weekdays[day],
+        time: '10:00 - 11:00',
+        available: true
       });
       
       // Add afternoon slot
       slots.push({
+        id: `afternoon-${i}`,
         date: date.format('YYYY-MM-DD'),
-        start: '14:00',
-        end: '15:00',
+        weekday: weekdays[day],
+        time: '14:00 - 15:00',
+        available: true
       });
     }
     
@@ -151,10 +153,10 @@ export default function InterviewFlowPage() {
                   <Text>{dayjs(timeSlotSelected.date).format('MMMM DD, YYYY (dddd)')}</Text>
                   <br />
                   <Text strong>Time: </Text>
-                  <Text>{timeSlotSelected.start} - {timeSlotSelected.end}</Text>
+                  <Text>{timeSlotSelected.time}</Text>
                   <br />
                   <Text strong>Type: </Text>
-                  <Text>{interviewType === 'video' ? 'Video Interview' : 'On-site Interview'}</Text>
+                  <Text>{interviewType === InterviewType.VIDEO ? 'Video Interview' : 'On-site Interview'}</Text>
                 </div>
               )}
               <Button 

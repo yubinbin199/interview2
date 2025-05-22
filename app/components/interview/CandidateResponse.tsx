@@ -23,7 +23,7 @@ import {
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import styles from './InterviewStyles.module.css';
-import { InterviewType, TimeSlot } from '../../types/interview';
+import { InterviewType, TimeSlot } from '@/app/types/interview';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -107,21 +107,21 @@ const CandidateResponse: React.FC<CandidateResponseProps> = ({
     <Card className={styles.interviewCardInner}>
       <Radio.Group 
         className={styles.timeSlotRadioGroup}
-        value={selectedSlot ? `${selectedSlot.date}-${selectedSlot.start}` : ''}
+        value={selectedSlot ? `${selectedSlot.date}-${selectedSlot.time}` : ''}
       >
         <Row gutter={[16, 16]}>
           {timeSlots.map((slot, index) => (
             <Col xs={24} sm={12} md={8} lg={6} key={index}>
               <div 
-                className={`${styles.timeSlotCard} ${selectedSlot && selectedSlot.date === slot.date && selectedSlot.start === slot.start ? styles.timeSlotCardSelected : ''}`}
+                className={`${styles.timeSlotCard} ${selectedSlot && selectedSlot.date === slot.date && selectedSlot.time === slot.time ? styles.timeSlotCardSelected : ''}`}
                 onClick={() => handleTimeSlotSelect(slot)}
               >
-                <Radio value={`${slot.date}-${slot.start}`} className={styles.slotRadio} />
+                <Radio value={`${slot.date}-${slot.time}`} className={styles.slotRadio} />
                 <div className={styles.timeSlotDate}>
                   {dayjs(slot.date).format('MMM DD (ddd)')}
                 </div>
                 <div className={styles.timeSlotTime}>
-                  <ClockCircleOutlined /> {slot.start} - {slot.end}
+                  <ClockCircleOutlined /> {slot.time}
                 </div>
               </div>
             </Col>
@@ -146,7 +146,7 @@ const CandidateResponse: React.FC<CandidateResponseProps> = ({
                     {dayjs(selectedSlot.date).format('MMMM DD, YYYY (dddd)')}
                   </div>
                   <div className={styles.timeSlotTime}>
-                    <ClockCircleOutlined /> {selectedSlot.start} - {selectedSlot.end}
+                    <ClockCircleOutlined /> {selectedSlot.time}
                   </div>
                 </div>
               </div>

@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { Typography, Card, Alert, Button, Space } from 'antd';
-import PageLayoutWithNav from '../components/PageLayoutWithNav';
-import CandidateResponse from '../components/interview/CandidateResponse';
+import PageLayoutWithNav from '@/app/components/PageLayoutWithNav';
+import CandidateResponse from '@/app/components/interview/CandidateResponse';
 import dayjs from 'dayjs';
-import { TimeSlot } from '../types/interview';
+import { TimeSlot, InterviewType } from '@/app/types/interview';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -17,22 +17,29 @@ export default function InterviewPage() {
   const generateTimeSlots = (): TimeSlot[] => {
     const today = dayjs();
     const slots: TimeSlot[] = [];
+    const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     
     // Generate 5 morning slots (one for each of the next 5 days)
     for (let i = 0; i < 5; i++) {
       const date = today.add(i + 1, 'day');
+      const day = date.day();
+      
       // Morning slot
       slots.push({
+        id: `morning-${i}`,
         date: date.format('YYYY-MM-DD'),
-        start: '10:00',
-        end: '11:00',
+        weekday: weekdays[day],
+        time: '10:00 - 11:00',
+        available: true
       });
       
       // Afternoon slot
       slots.push({
+        id: `afternoon-${i}`,
         date: date.format('YYYY-MM-DD'),
-        start: '14:00',
-        end: '15:00',
+        weekday: weekdays[day],
+        time: '14:00 - 15:00',
+        available: true
       });
     }
     
@@ -87,7 +94,7 @@ export default function InterviewPage() {
           <CandidateResponse
             companyName="Tuwaii Technologies"
             position="Frontend Developer"
-            interviewType="video"
+            interviewType={InterviewType.VIDEO}
             timeSlots={generateTimeSlots()}
             onConfirm={handleConfirmInterview}
           />
@@ -124,7 +131,7 @@ export default function InterviewPage() {
                 </Paragraph>
                 <Paragraph>
                   <Text strong>Time: </Text>
-                  <Text>{selectedSlot.start} - {selectedSlot.end}</Text>
+                  <Text>{selectedSlot.time}</Text>
                 </Paragraph>
               </Card>
             )}
