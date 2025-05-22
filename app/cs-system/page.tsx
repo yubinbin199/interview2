@@ -51,6 +51,8 @@ import {
 import { useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import LanguageSelector from '../components/LanguageSelector';
+import UserProfilePopover from '../components/UserProfilePopover';
 dayjs.extend(isBetween);
 const { RangePicker } = DatePicker;
 
@@ -1238,21 +1240,13 @@ export default function CSSystem() {
             />
             
             <div style={{ marginTop: 'auto', padding: '16px 8px', borderTop: '1px solid #e8e8e8' }}>
-              <div style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-                <Avatar icon={<UserOutlined />} />
-                <div style={{ marginLeft: 8 }}>
-                  <Text strong style={{ display: 'block', lineHeight: '1.2' }}>Support Agent</Text>
-                  <Text type="secondary" style={{ fontSize: 12 }}>support@g123.com</Text>
-                </div>
+              <UserProfilePopover 
+                userName="Support Agent" 
+                userEmail="support@g123.com" 
+              />
+              <div style={{ marginTop: 12 }}>
+                <LanguageSelector />
               </div>
-              <Button 
-                icon={<LogoutOutlined />} 
-                style={{ width: '100%' }}
-                type="text"
-                danger
-              >
-                Sign Out
-              </Button>
             </div>
           </div>
         </Layout.Sider>

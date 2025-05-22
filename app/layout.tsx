@@ -2,7 +2,7 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConfigProvider, App as AntdApp } from "antd";
-import enUS from "antd/locale/en_US";
+import { LanguageProvider } from "./context/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,16 +29,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ConfigProvider
-          locale={enUS}
-          theme={{
-            token: {
-              colorPrimary: "#1677ff",
-            },
-          }}
-        >
-          <AntdApp>{children}</AntdApp>
-        </ConfigProvider>
+        <LanguageProvider>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#1677ff",
+              },
+            }}
+          >
+            <AntdApp>{children}</AntdApp>
+          </ConfigProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

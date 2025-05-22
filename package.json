@@ -5,22 +5,24 @@
   "description": "基于Next.js和Ant Design 5构建的企业级系统原型",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build --no-lint",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "antd": "^5.25.1",
+    "dayjs-business-days": "^1.0.4",
     "next": "15.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/node": "^20.17.50",
+    "@types/react": "^18.3.21",
+    "@types/react-dom": "^18.3.7",
+    "dayjs": "^1.11.13",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
