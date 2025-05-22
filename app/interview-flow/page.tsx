@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { Typography, Steps, Card, Button, message } from 'antd';
-import InterviewInvitationForm from '@/app/components/interview/InterviewInvitation';
-import CandidateResponse from '@/app/components/interview/CandidateResponse';
-import PageLayoutWithNav from '@/app/components/PageLayoutWithNav';
+import InterviewInvitationForm from '../components/interview/InterviewInvitation';
+import CandidateResponse from '../components/interview/CandidateResponse';
+import PageLayoutWithNav from '../components/PageLayoutWithNav';
 import dayjs from 'dayjs';
-import { InterviewType, TimeSlot, InterviewInvitation } from '@/app/types/interview';
+import { InterviewType, TimeSlot, InterviewInvitation } from '../types/interview';
 
 const { Title, Text } = Typography;
 

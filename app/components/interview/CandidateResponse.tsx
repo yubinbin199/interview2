@@ -23,7 +23,7 @@ import {
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import styles from './InterviewStyles.module.css';
-import { InterviewType, TimeSlot } from '@/app/types/interview';
+import { InterviewType, TimeSlot } from '../../types/interview';
 
 const { Title, Text, Paragraph } = Typography;
 

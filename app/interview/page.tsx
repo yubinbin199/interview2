@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { Typography, Card, Alert, Button, Space } from 'antd';
-import PageLayoutWithNav from '@/app/components/PageLayoutWithNav';
-import CandidateResponse from '@/app/components/interview/CandidateResponse';
+import PageLayoutWithNav from '../components/PageLayoutWithNav';
+import CandidateResponse from '../components/interview/CandidateResponse';
 import dayjs from 'dayjs';
-import { TimeSlot, InterviewType } from '@/app/types/interview';
+import { TimeSlot, InterviewType } from '../types/interview';
 
 const { Title, Text, Paragraph } = Typography;
 

@@ -24,7 +24,7 @@ import {
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 // import businessDays from 'dayjs-business-days';
-import { InterviewInvitation, InterviewType, TimeSlot, Interviewer } from '@/app/types/interview';
+import { InterviewInvitation, InterviewType, TimeSlot, Interviewer } from '../../types/interview';
 import styles from './InterviewStyles.module.css';
 
 // Configure dayjs with business days plugin
